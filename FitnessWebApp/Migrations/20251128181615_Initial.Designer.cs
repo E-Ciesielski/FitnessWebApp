@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FitnessWebApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251127150337_Initial")]
+    [Migration("20251128181615_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -36,12 +36,13 @@ namespace FitnessWebApp.Migrations
                     b.Property<int>("Calories")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.HasKey("Id");
 
