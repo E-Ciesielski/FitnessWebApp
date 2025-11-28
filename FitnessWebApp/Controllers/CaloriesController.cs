@@ -21,8 +21,8 @@ public class CaloriesController : Controller
             selectedDate = dateParsed;
         }
         var caloriesLog = _context.CaloriesLogs.Where(c => c.Date == selectedDate).ToList();
-        
-        return View(new CaloriesIndexViewModel { CaloriesLogs = caloriesLog , SelectedDate = selectedDate });
+        var totalCalories = caloriesLog.Sum(c => c.Calories);
+        return View(new CaloriesIndexViewModel { CaloriesLogs = caloriesLog, SelectedDate = selectedDate,  TotalCalories = totalCalories });
     }
 
     public IActionResult Create([FromQuery()] string? date = null)
