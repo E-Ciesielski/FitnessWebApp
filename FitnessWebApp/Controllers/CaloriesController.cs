@@ -54,4 +54,36 @@ public class CaloriesController : Controller
         
         return RedirectToAction("Index", "Calories", new { date = caloriesLog.Date.ToString("yyyy-MM-dd") });
     }
+
+    [HttpGet("edit/{id}")]
+    public IActionResult Edit(int id)
+    {
+        var caloriesLog = _context.CaloriesLogs.Find(id);
+        return View(caloriesLog);
+    }
+    
+    [HttpPost("edit/{id}")]
+    public IActionResult Edit(int id, CaloriesLog caloriesLog)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(caloriesLog);
+        }
+        _context.CaloriesLogs.Update(caloriesLog);
+        _context.SaveChanges();
+        return RedirectToAction("Index", "Calories", new { date = caloriesLog.Date.ToString("yyyy-MM-dd") });
+    }
+
+    [HttpPost("delete/{id}")]
+    public IActionResult Delete(int id)
+    {
+        var caloriesLog = _context.CaloriesLogs.Find(id);
+        if (caloriesLog == null)
+        {
+            return NotFound();
+        }
+        _context.CaloriesLogs.Remove(caloriesLog);
+        _context.SaveChanges(); 
+        return RedirectToAction("Index", "Calories", new { date = caloriesLog.Date.ToString("yyyy-MM-dd") });
+    }
 }
