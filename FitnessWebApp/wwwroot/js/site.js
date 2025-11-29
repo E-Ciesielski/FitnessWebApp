@@ -5,6 +5,15 @@
 $(document).ready(function () {
     $("#calories-form #Unit").trigger("change");
 })
+$('#themeSwitch').on('change', function(){
+    if($(this).is(':checked')){
+        $('html').attr('data-bs-theme', 'dark');
+    }
+    else{
+        $('html').attr('data-bs-theme', 'light');
+    }
+})
+
 $("#calories-form #Unit").on("change", function () {
     if(this.value === "0") {
         $("#calories-form #CaloriesPerUnit").attr("readonly", true).val("");
