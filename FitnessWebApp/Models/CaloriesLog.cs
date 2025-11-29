@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace FitnessWebApp.Models;
 
@@ -18,4 +19,7 @@ public class CaloriesLog
     [MaxLength(200)]
     [MinLength(3)]
     public required string Name { get; set; }
+    
+    public string? UserId { get; set; }
+    public IdentityUser? User { get; set; }
 }
