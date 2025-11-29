@@ -30,7 +30,13 @@ namespace FitnessWebApp.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<float?>("Amount")
+                        .HasColumnType("real");
+
                     b.Property<int>("Calories")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("CaloriesPerUnit")
                         .HasColumnType("integer");
 
                     b.Property<DateOnly>("Date")
@@ -41,8 +47,10 @@ namespace FitnessWebApp.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
 
+                    b.Property<int?>("Unit")
+                        .HasColumnType("integer");
+
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -256,9 +264,7 @@ namespace FitnessWebApp.Migrations
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });

@@ -4,7 +4,7 @@
 }
 
 <h2>New log</h2>
-<form method="post">
+<form method="post" id="calories-form">
     <div class="alert-danger" asp-validation-summary="All"></div>
     <input type="hidden" asp-for="Date" asp-format="{0:yyyy-MM-dd}"/>
     <div class="mb-3">
@@ -13,8 +13,26 @@
         <span class="text-danger" asp-validation-for="Name"></span>
     </div>
     <div class="row mb-3">
+        <div class="col-lg-3 mb-3">
+            <label class="form-label" asp-for="Unit">Unit</label>
+            <select class="form-select" asp-for="Unit">
+                <option selected value="0">Disabled</option>
+                <option value="1">100 g</option>
+                <option value="2">100 ml</option>
+            </select>
+        </div>
+        <div class="col-lg-3 mb-3">
+            <label class="form-label" asp-for="CaloriesPerUnit">Calories per unit (kcal)</label>
+            <input type="number" class="form-control" asp-for="CaloriesPerUnit" readonly/>
+            <span class="text-danger" asp-validation-for="CaloriesPerUnit"></span>
+        </div>
+        <div class="col-lg-3 mb-3">
+            <label class="form-label" asp-for="Amount">Amount <span id="AmountUnit"></span></label>
+            <input type="number" class="form-control" asp-for="Amount" readonly/>
+            <span class="text-danger" asp-validation-for="Amount"></span>
+        </div>
         <div class="col-lg-3">
-            <label class="form-label" asp-for="Calories">Calories</label>
+            <label class="form-label" asp-for="Calories">Total calories</label>
             <input type="number" class="form-control" asp-for="Calories"/>
             <span class="text-danger" asp-validation-for="Calories"></span>
         </div>
